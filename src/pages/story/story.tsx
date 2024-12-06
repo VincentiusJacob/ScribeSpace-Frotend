@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Import icon
@@ -13,21 +13,6 @@ interface Article {
   article_tags: { tags: { name: string } }[]; // Assuming article_tags is an array of tag objects
   views: number;
 }
-
-// Function to extract text content from the article
-const extractTextContent = (content: string): string => {
-  try {
-    const contentArray: { type: string; content: string }[] =
-      JSON.parse(content);
-    return contentArray
-      .filter((item) => item.type === "text") // Filter for only text items
-      .map((item) => item.content) // Extract the text content
-      .join(" "); // Join all text content into a single string
-  } catch (error) {
-    console.error("Error parsing content:", error);
-    return "";
-  }
-};
 
 const StoryPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
