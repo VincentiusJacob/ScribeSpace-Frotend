@@ -19,10 +19,7 @@ const signUp: React.FC = () => {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "https://scribe-space-backend.vercel.app/api/users/createUser",
-        userData
-      );
+      await axios.post("http://localhost:6543/api/users/createUser", userData);
       Swal.fire({
         title: "Account Registered",
         text: "You can now log in with your credentials.",

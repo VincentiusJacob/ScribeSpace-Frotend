@@ -37,7 +37,7 @@ const WritingPage: React.FC = () => {
 
     const currentUserData = localStorage.getItem("user");
     if (currentUserData) {
-      setCurrentUser(JSON.parse(currentUserData)); // Parsing JSON untuk mendapatkan object
+      setCurrentUser(JSON.parse(currentUserData));
     }
   }, []);
 
@@ -47,9 +47,9 @@ const WritingPage: React.FC = () => {
 
   const handleTagToggle = (tag: string) => {
     if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter((t) => t !== tag)); // Deselect tag
+      setSelectedTags(selectedTags.filter((t) => t !== tag));
     } else {
-      setSelectedTags([...selectedTags, tag]); // Select tag
+      setSelectedTags([...selectedTags, tag]);
     }
   };
 
@@ -67,7 +67,6 @@ const WritingPage: React.FC = () => {
     if (files) {
       const updatedBlocks = [...contentBlocks];
       for (const file of files) {
-        // Upload ke Supabase
         const uploadedUrl = await uploadMediaToSupabase(file, title);
 
         if (uploadedUrl) {
@@ -97,11 +96,10 @@ const WritingPage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "https://scribe-space-backend.vercel.app/api/articles/uploadMedia",
-        formData,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        "http://localhost:6543/api/articles/uploadMedia",
+        formData
       );
-      return response.data.url; // URL publik
+      return response.data.url;
     } catch (err) {
       console.error("Media upload error:", err);
       return null;
@@ -110,9 +108,9 @@ const WritingPage: React.FC = () => {
 
   const addTextBlock = (index: number) => {
     const updatedBlocks = [...contentBlocks];
-    updatedBlocks.splice(index + 1, 0, ""); // Tambahkan blok teks kosong baru
+    updatedBlocks.splice(index + 1, 0, "");
     setContentBlocks(updatedBlocks);
-    setCurrentLine(index + 1); // Fokus ke blok baru
+    setCurrentLine(index + 1);
     setFocusToNewLine(index + 1);
   };
 
@@ -133,13 +131,11 @@ const WritingPage: React.FC = () => {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
       const userId = user?.user_id;
 
-      // Map content blocks for the correct format
       const articleContent = await Promise.all(
         contentBlocks.map(async (block) => {
           if (typeof block === "string") {
             return { type: "text", content: block };
           } else if (block.type === "media") {
-            // Upload media file to Supabase
             if (block.src.startsWith("blob:")) {
               const blob = await fetch(block.src).then((r) => r.blob());
               const file = new File([blob], "uploaded-media", {
@@ -149,7 +145,7 @@ const WritingPage: React.FC = () => {
 
               return {
                 ...block,
-                src: uploadedUrl || block.src, // Replace with Supabase URL if available
+                src: uploadedUrl || block.src,
               };
             }
           }
@@ -158,7 +154,7 @@ const WritingPage: React.FC = () => {
       );
 
       const response = await axios.post(
-        "https://scribe-space-backend.vercel.app/api/articles/publish",
+        "http://localhost:6543/api/articles/publish",
         {
           title,
           content: articleContent,
@@ -260,7 +256,7 @@ const WritingPage: React.FC = () => {
                     placeholder="Start writing here..."
                     value={block}
                     onChange={(e) => handleTextChange(index, e.target.value)}
-                    onFocus={() => setCurrentLine(index)} // Update current line on focus
+                    onFocus={() => setCurrentLine(index)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         e.preventDefault();
@@ -268,7 +264,7 @@ const WritingPage: React.FC = () => {
                       }
                     }}
                   />
-                  {currentLine === index && ( // Show Add Button only for the current line
+                  {currentLine === index && (
                     <button
                       className="add-media-btn"
                       onClick={() =>

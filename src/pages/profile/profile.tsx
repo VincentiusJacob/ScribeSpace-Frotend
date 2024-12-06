@@ -11,20 +11,16 @@ const ProfilePage = () => {
   const [newUsername, setNewUsername] = useState(userData.username);
   const [profilePic, setProfilePic] = useState<File | null>(null);
 
-  // Get user ID from localStorage
   const userId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user") as string).user_id
     : null;
 
-  const navigate = useNavigate(); // useNavigate hook
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userId) {
-      // Fetch the user profile from the backend using the user ID
       axios
-        .get(
-          `https://scribe-space-backend.vercel.app/api/users/getUserById/${userId}`
-        )
+        .get(`http://localhost:6543/api/users/getUserById/${userId}`)
         .then((response) => {
           setUserData(response.data.user);
           setNewUsername(response.data.user.username);
@@ -51,7 +47,7 @@ const ProfilePage = () => {
     try {
       if (userId) {
         const response = await axios.put(
-          `https://scribe-space-backend.vercel.app/api/users/profile/${userId}`, // Include the user ID in the URL
+          `http://localhost:6543/api/users/profile/${userId}`,
           formData,
           {
             headers: {
@@ -61,7 +57,7 @@ const ProfilePage = () => {
         );
         alert("Profile updated successfully!");
         setUserData(response.data.user);
-        navigate("/home"); // Navigate to the /home page after successful update
+        navigate("/home");
       }
     } catch (error) {
       console.error("Error updating profile", error);

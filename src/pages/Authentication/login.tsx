@@ -19,24 +19,23 @@ const Login: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "https://scribe-space-backend.vercel.app/api/users/login",
+        "http://localhost:6543/api/users/login",
         userLoginData,
         {
           headers: {
-            "Content-Type": "application/json", // Ensure this is set to application/json
-            Accept: "application/json", // Add Accept header for the server to understand the expected response
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );
 
       if (response.status === 200) {
-        const userData = response.data; // Full user data from the server
+        const userData = response.data;
 
-        // Store user data in local storage
         localStorage.setItem("user", JSON.stringify(userData));
 
         Swal.fire("Success", "Login successful!", "success");
-        navigate("/home"); // Navigate to the home page
+        navigate("/home");
       }
     } catch (err: any) {
       const errorMessage =

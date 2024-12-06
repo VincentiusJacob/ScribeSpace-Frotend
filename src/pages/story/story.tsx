@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye"; // Import icon
+import { Link } from "react-router-dom";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import "./story.css";
 
-// Define the Article type
 interface Article {
   article_id: string;
   title: string;
   content: string;
   image_url: string;
-  article_tags: { tags: { name: string } }[]; // Assuming article_tags is an array of tag objects
+  article_tags: { tags: { name: string } }[];
   views: number;
 }
 
@@ -32,7 +31,7 @@ const StoryPage = () => {
   const fetchArticles = async (userId: string) => {
     try {
       const response = await axios.get(
-        `https://scribe-space-backend.vercel.app/api/articles/user/${userId}`
+        `http://localhost:6543/api/articles/user/${userId}`
       );
       setArticles(response.data);
       setLoading(false);

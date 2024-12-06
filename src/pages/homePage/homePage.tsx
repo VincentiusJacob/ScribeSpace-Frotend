@@ -19,9 +19,9 @@ interface ContentItem {
 interface Article {
   article_id: string;
   title: string;
-  content: string; // raw JSON string
+  content: string;
   views: number;
-  image_url: string | null; // will be dynamically determined
+  image_url: string | null;
   article_tags: { tags: Tag }[];
 }
 
@@ -34,7 +34,7 @@ const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const handleTagToggle = (tag: string) => {
-    setSelectedTags(tag === selectedTags ? "" : tag); // Toggle tag selection
+    setSelectedTags(tag === selectedTags ? "" : tag);
   };
 
   const handleSearch = (query: string) => {
@@ -45,7 +45,7 @@ const HomePage: React.FC = () => {
       );
       setSearchResults(filteredArticles);
     } else {
-      setSearchResults([]); // Jika query kosong, reset hasil pencarian
+      setSearchResults([]);
     }
   };
 
@@ -63,14 +63,13 @@ const HomePage: React.FC = () => {
     "Lifestyle",
   ];
 
-  // Function to extract only text content from parsed JSON content
   const extractTextContent = (content: string) => {
     try {
       const contentArray: ContentItem[] = JSON.parse(content);
       return contentArray
-        .filter((item) => item.type === "text") // Filter for only text items
-        .map((item) => item.content) // Extract the text content
-        .join(" "); // Join all text content into a single string
+        .filter((item) => item.type === "text")
+        .map((item) => item.content)
+        .join(" ");
     } catch (error) {
       console.error("Error parsing content:", error);
       return "";
@@ -79,9 +78,8 @@ const HomePage: React.FC = () => {
 
   const handleArticleClick = async (articleId: string) => {
     try {
-      // Kirim request ke server untuk menambah 1 pada jumlah views artikel
       await axios.put(
-        `https://scribe-space-backend.vercel.app/api/articles/incrementViews/${articleId}`
+        `http://localhost:6543/api/articles/incrementViews/${articleId}`
       );
     } catch (error) {
       console.error("Error updating views:", error);
@@ -92,12 +90,11 @@ const HomePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://scribe-space-backend.vercel.app/api/articles/getArticles"
+          "http://localhost:6543/api/articles/getArticles"
         );
         const rawArticles: Article[] = response.data;
 
         const processedArticles = rawArticles.map(async (article) => {
-          // Parse content untuk mendapatkan image pertama
           let imageUrl = "";
           try {
             const contentArray: ContentItem[] = JSON.parse(article.content);
@@ -114,7 +111,6 @@ const HomePage: React.FC = () => {
             );
           }
 
-          // Kirim permintaan untuk update image_url di database
           if (imageUrl && imageUrl !== article.image_url) {
             try {
               await axios.put(
@@ -132,18 +128,16 @@ const HomePage: React.FC = () => {
           };
         });
 
-        // Menunggu semua update selesai
         const processedArticlesWithImages = await Promise.all(
           processedArticles
         );
 
-        // Sortir artikel berdasarkan views
         const sortedArticles = processedArticlesWithImages.sort(
           (a, b) => b.views - a.views
         );
 
-        setMostTrending(sortedArticles.slice(0, 4)); // Top 4 artikel
-        setExploreMore(sortedArticles.slice(4)); // Artikel sisanya
+        setMostTrending(sortedArticles.slice(0, 4));
+        setExploreMore(sortedArticles.slice(4));
         setArticleData(processedArticlesWithImages);
       } catch (err) {
         console.error("Error fetching articles:", err);
@@ -154,7 +148,7 @@ const HomePage: React.FC = () => {
   }, []);
 
   const filteredArticles = (articles: Article[]) => {
-    if (!selectedTags || selectedTags === "For You") return articles; // No filter applied or "For You" selected
+    if (!selectedTags || selectedTags === "For You") return articles;
     return articles.filter((article) =>
       article.article_tags.some(
         (tagWrapper) => tagWrapper.tags.name === selectedTags
@@ -166,7 +160,6 @@ const HomePage: React.FC = () => {
     <div className="homePageContainer">
       <Header onSearch={handleSearch} />
       <div className="main-page">
-        {/* Tags Section */}
         <div className="tags-container homePageTag">
           {tags.map((tag, idx) => (
             <button
@@ -211,80 +204,98 @@ const HomePage: React.FC = () => {
             <div className="most-trending">
               <h1>Most Trending</h1>
               <div className="article-list">
-                <div className="left-column">
-                  {filteredArticles(mostTrending)
-                    .slice(0, 1)
-                    .map((article) => (
-                      <Link
-                        to={`/${article.article_id}`} // Dynamically set the URL based on the article title
-                        key={article.article_id}
-                        className="article-card large"
-                        onClick={() => handleArticleClick(article.article_id)}
-                      >
-                        {article.image_url && (
-                          <img src={article.image_url} alt={article.title} />
-                        )}
-                        <h2>{article.title}</h2>
-                        <div className="article-tags">
-                          {article.article_tags.map((tagWrapper, index) => (
-                            <p className="tag" key={index}>
-                              {tagWrapper.tags.name}
-                            </p>
-                          ))}
-                        </div>
-                        <p className="article-views">
-                          <RemoveRedEyeIcon fontSize="medium" /> {article.views}
-                        </p>
-                      </Link>
-                    ))}
-                </div>
-                <div className="right-column">
-                  {filteredArticles(mostTrending)
-                    .slice(1, 4)
-                    .map((article) => (
-                      <Link
-                        to={`/${article.article_id}`} // Dynamically set the URL based on the article title
-                        key={article.article_id}
-                        className="article-card"
-                        onClick={() => handleArticleClick(article.article_id)}
-                      >
-                        {article.image_url && (
-                          <img src={article.image_url} alt={article.title} />
-                        )}
-                        <div className="article-trending-info">
-                          <h2>{article.title}</h2>
-                          <p>
-                            {extractTextContent(article.content).substring(
-                              0,
-                              100
+                {mostTrending.length === 0 ? (
+                  <p> No articles have been created yet.</p>
+                ) : (
+                  <>
+                    <div className="left-column">
+                      {filteredArticles(mostTrending)
+                        .slice(0, 1)
+                        .map((article) => (
+                          <Link
+                            to={`/${article.article_id}`}
+                            key={article.article_id}
+                            className="article-card large"
+                            onClick={() =>
+                              handleArticleClick(article.article_id)
+                            }
+                          >
+                            {article.image_url && (
+                              <img
+                                src={article.image_url}
+                                alt={article.title}
+                              />
                             )}
-                            ...
-                          </p>
-                          <div className="article-tags">
-                            {article.article_tags.map((tagWrapper, index) => (
-                              <p className="tag" key={index}>
-                                {tagWrapper.tags.name}
+                            <h2>{article.title}</h2>
+                            <div className="article-tags">
+                              {article.article_tags.map((tagWrapper, index) => (
+                                <p className="tag" key={index}>
+                                  {tagWrapper.tags.name}
+                                </p>
+                              ))}
+                            </div>
+                            <p className="article-views">
+                              <RemoveRedEyeIcon fontSize="medium" />{" "}
+                              {article.views}
+                            </p>
+                          </Link>
+                        ))}
+                    </div>
+                    <div className="right-column">
+                      {filteredArticles(mostTrending)
+                        .slice(1, 4)
+                        .map((article) => (
+                          <Link
+                            to={`/${article.article_id}`}
+                            key={article.article_id}
+                            className="article-card"
+                            onClick={() =>
+                              handleArticleClick(article.article_id)
+                            }
+                          >
+                            {article.image_url && (
+                              <img
+                                src={article.image_url}
+                                alt={article.title}
+                              />
+                            )}
+                            <div className="article-trending-info">
+                              <h2>{article.title}</h2>
+                              <p>
+                                {extractTextContent(article.content).substring(
+                                  0,
+                                  100
+                                )}
+                                ...
                               </p>
-                            ))}
-                          </div>
-                          <p className="article-views">
-                            <RemoveRedEyeIcon fontSize="medium" />{" "}
-                            {article.views}
-                          </p>
-                        </div>
-                      </Link>
-                    ))}
-                </div>
+                              <div className="article-tags">
+                                {article.article_tags.map(
+                                  (tagWrapper, index) => (
+                                    <p className="tag" key={index}>
+                                      {tagWrapper.tags.name}
+                                    </p>
+                                  )
+                                )}
+                              </div>
+                              <p className="article-views">
+                                <RemoveRedEyeIcon fontSize="medium" />{" "}
+                                {article.views}
+                              </p>
+                            </div>
+                          </Link>
+                        ))}
+                    </div>
+                  </>
+                )}
               </div>
             </div>
 
-            {/* Explore More Section */}
             <div className="explore-more">
               <h1>Explore More</h1>
               <div className="article-list">
                 {filteredArticles(exploreMore).map((article) => (
                   <Link
-                    to={`/${article.article_id}`} // Dynamically set the URL based on the article title
+                    to={`/${article.article_id}`}
                     key={article.article_id}
                     className="article-card"
                     onClick={() => handleArticleClick(article.article_id)}
@@ -317,14 +328,13 @@ const HomePage: React.FC = () => {
           </>
         )}
 
-        {/* For Other Tags: "Articles related to [tag]" Section */}
         {selectedTags && selectedTags !== "For You" && (
           <div className="articles-related">
             <h1>Articles related to {selectedTags}</h1>
             <div className="article-list">
               {filteredArticles(articleData).map((article) => (
                 <Link
-                  to={`/${article.article_id}`} // Dynamically set the URL based on the article title
+                  to={`/${article.article_id}`}
                   key={article.article_id}
                   className="article-card"
                   onClick={() => handleArticleClick(article.article_id)}
@@ -336,10 +346,7 @@ const HomePage: React.FC = () => {
                   <p>
                     {extractTextContent(article.content).substring(0, 100)}...
                   </p>
-                  <p>
-                    <RemoveRedEyeIcon fontSize="medium" />
-                    {article.views}
-                  </p>
+
                   <div className="article-tags">
                     {article.article_tags.map((tagWrapper, index) => (
                       <p className="tag" key={index}>

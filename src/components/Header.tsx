@@ -24,9 +24,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
       const userId = userData.user_id;
 
       axios
-        .get(
-          `https://scribe-space-backend.vercel.app/api/users/getUserById/${userId}`
-        )
+        .get(`http://localhost:6543/api/users/getUserById/${userId}`)
         .then((response) => {
           const profilePictureUrl = response.data.user.profile_picture;
           setProfilePicture(profilePictureUrl);
@@ -58,7 +56,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   return (
     <div className="headerContainer">
       <div className="header-left">
-        <h1> MEDIUM </h1>
+        <h1> ScribeSpace </h1>
         <form className="blog-search" onSubmit={handleSearchSubmit}>
           <SearchIcon id="search-icon-header" fontSize="large" />
           <input
