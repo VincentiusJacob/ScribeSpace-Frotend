@@ -20,7 +20,13 @@ const Login: React.FC = () => {
     try {
       const response = await axios.post(
         "https://scribe-space-backend.vercel.app/api/users/login",
-        userLoginData
+        userLoginData,
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensure this is set to application/json
+            Accept: "application/json", // Add Accept header for the server to understand the expected response
+          },
+        }
       );
 
       if (response.status === 200) {
