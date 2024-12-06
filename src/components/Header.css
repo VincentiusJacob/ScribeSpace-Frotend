@@ -47,6 +47,12 @@
   border-radius: 12px;
 }
 
+.create-blog:hover {
+  background-color: #1a73e8;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
 .link-text {
   font-size: 20px;
   text-decoration: none;
@@ -73,6 +79,19 @@
   width: 200px;
   padding: 1em;
   z-index: 10;
+}
+
+.profile-settings ul li:hover {
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  padding: 0.5em;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.profile-settings button:hover {
+  background-color: darkred;
+  transform: scale(1.05);
 }
 
 .profile-settings ul {

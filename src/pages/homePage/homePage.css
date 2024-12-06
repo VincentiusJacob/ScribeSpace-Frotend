@@ -18,10 +18,14 @@
   padding: 0 4em;
   display: flex;
   flex-direction: column;
-  margin-top: 7em;
+
   gap: 2em;
 }
 
+.explore-more,
+.search-results {
+  margin-top: 4em;
+}
 .article-list {
   display: grid;
   grid-template-columns: 1fr 1fr;

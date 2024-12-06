@@ -50,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
   const handleSignOut = () => {
     localStorage.removeItem("user");
-    navigate("/login");
+    navigate("/");
   };
 
   return (

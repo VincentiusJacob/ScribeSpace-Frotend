@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./writingPage.css";
 
@@ -19,6 +19,7 @@ const WritingPage: React.FC = () => {
   const [tags, setTags] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const textAreaRefs = useRef<(HTMLTextAreaElement | null)[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const predefinedTags = [
@@ -177,11 +178,16 @@ const WritingPage: React.FC = () => {
     }
   };
 
+  const handleSignOut = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <div className="writingPageContainer">
       <div className="writingPageHeader">
         <div className="writingPageHeader-left">
-          <h1>MEDIUM</h1>
+          <h1>ScribeSpace</h1>
           {currentUser && <span>Draft in {currentUser.username}</span>}
         </div>
         <div className="writingPageHeader-right">
@@ -203,19 +209,19 @@ const WritingPage: React.FC = () => {
             >
               <ul>
                 <li>
-                  <Link to="/profile">
+                  <Link to="/profile" className="profile-nav">
                     <PersonIcon />
                     Profile
                   </Link>
                 </li>
                 <li>
-                  <Link to="myStory">
+                  <Link to="myStory" className="profile-nav">
                     <LibraryBooksIcon />
                     My Story
                   </Link>
                 </li>
               </ul>
-              <button>Sign Out</button>
+              <button onClick={handleSignOut}>Sign Out</button>
             </div>
           </div>
         </div>

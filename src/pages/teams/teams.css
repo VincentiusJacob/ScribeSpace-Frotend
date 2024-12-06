@@ -1,0 +1,60 @@
+/* Teams.css */
+
+.teamsContainer {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+}
+
+.teamsHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.teamsHeader h1 {
+  font-size: 3rem;
+  color: #2d3e50;
+}
+
+.teamsHeader p {
+  font-size: 1.2rem;
+  color: #757575;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.teamMembers {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.teamMember {
+  width: 200px;
+  text-align: center;
+  margin: 1rem;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.teamMember img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.teamMember h2 {
+  font-size: 1.5rem;
+  color: #2d3e50;
+  margin-bottom: 0.5rem;
+}
+
+.teamMember p {
+  font-size: 1rem;
+  color: #757575;
+}

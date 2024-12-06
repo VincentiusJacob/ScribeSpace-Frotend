@@ -46,7 +46,7 @@ const signUp: React.FC = () => {
       </div>
 
       <div className="authenticationBox">
-        <h2> Join Medium. </h2>
+        <h2> Join ScribeSpace. </h2>
         <form className="authenticationForm" onSubmit={handleSubmitForm}>
           <div className="form-detail">
             <label> Name</label>

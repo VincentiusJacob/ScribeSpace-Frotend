@@ -192,3 +192,10 @@
   background-color: #45a049;
   border-color: #45a049;
 }
+
+.profile-nav {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}

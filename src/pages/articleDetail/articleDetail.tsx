@@ -25,14 +25,14 @@ interface Article {
   image_url: string | null;
   article_tags: { tags: Tag }[];
   created_at: string;
-  user_id: string; // Menambahkan user_id untuk mengambil username
+  user_id: string;
 }
 
 const ArticleDetail = () => {
   const { articleID } = useParams();
   const [article, setArticle] = useState<Article | null>(null);
   const [recommendations, setRecommendations] = useState<Article[]>([]);
-  const [creator, setCreator] = useState<any>(null); // State untuk username
+  const [creator, setCreator] = useState<any>(null);
 
   useEffect(() => {
     const fetchArticle = async () => {
@@ -53,21 +53,20 @@ const ArticleDetail = () => {
 
   useEffect(() => {
     const fetchRecommendations = async () => {
-      if (!article || !article.article_tags || !article.article_id) return; // Pastikan article_id ada
+      if (!article || !article.article_tags || !article.article_id) return;
 
-      // Ambil semua tag yang valid
       const tags = article.article_tags
-        .filter((tagWrapper) => tagWrapper.tags && tagWrapper.tags.name) // Hanya ambil tag yang valid
-        .map((tagWrapper) => tagWrapper.tags.name); // Ambil nama tag
+        .filter((tagWrapper) => tagWrapper.tags && tagWrapper.tags.name)
+        .map((tagWrapper) => tagWrapper.tags.name);
 
-      console.log("Tags being sent:", tags); // Log untuk melihat tags yang dikirim
+      console.log("Tags being sent:", tags);
 
       try {
         const response = await axios.post(
           "http://localhost:6543/api/articles/getRecommendations",
           { tags, excludeArticleID: article.article_id, limit: 6 }
         );
-        console.log("Recommended articles:", response.data); // Log untuk melihat data artikel yang diterima
+        console.log("Recommended articles:", response.data);
         setRecommendations(response.data);
       } catch (error) {
         console.error("Error fetching recommendations:", error);
@@ -81,11 +80,11 @@ const ArticleDetail = () => {
     const fetchCreatorUsername = async () => {
       if (article && article.user_id) {
         try {
-          // Ganti URL dengan endpoint API yang sesuai untuk mengambil username berdasarkan user_id
           const response = await axios.get(
             `http://localhost:6543/api/users/getUserById/${article.user_id}`
           );
-          setCreator(response.data.user); // Simpan username di state
+          setCreator(response.data.user);
+          console.log("response: ", response.data);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -101,18 +100,17 @@ const ArticleDetail = () => {
     try {
       const contentArray: ContentBlock[] = JSON.parse(content);
       return contentArray
-        .filter((item) => item.type === "text") // Filter for only text items
-        .map((item) => item.content) // Extract the text content
-        .join(" "); // Join all text content into a single string
+        .filter((item) => item.type === "text")
+        .map((item) => item.content)
+        .join(" ");
     } catch (error) {
       console.error("Error parsing content:", error);
-      return ""; // Return empty string if parsing fails
+      return "";
     }
   };
 
   const handleArticleClick = async (articleId: string) => {
     try {
-      // Kirim request ke server untuk menambah 1 pada jumlah views artikel
       await axios.put(
         `http://localhost:6543/api/articles/incrementViews/${articleId}`
       );
@@ -131,7 +129,7 @@ const ArticleDetail = () => {
         <div className="articleDetailContent-header">
           <h1>{article.title}</h1>
           <div className="article-creator">
-            <img src={creator.profile_picture} alt="Profile" />
+            <img src={creator?.profile_picture} alt="Profile" />
             <div className="article-creator-info">
               <p>{creator ? creator.username : "Unknown User"}</p>
               <p>
