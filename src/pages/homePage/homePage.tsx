@@ -81,7 +81,7 @@ const HomePage: React.FC = () => {
     try {
       // Kirim request ke server untuk menambah 1 pada jumlah views artikel
       await axios.put(
-        `http://localhost:6543/api/articles/incrementViews/${articleId}`
+        `https://scribe-space-backend.vercel.app/api/articles/incrementViews/${articleId}`
       );
     } catch (error) {
       console.error("Error updating views:", error);
@@ -92,7 +92,7 @@ const HomePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:6543/api/articles/getArticles"
+          "https://scribe-space-backend.vercel.app/api/articles/getArticles"
         );
         const rawArticles: Article[] = response.data;
 

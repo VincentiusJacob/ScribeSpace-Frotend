@@ -32,7 +32,7 @@ const StoryPage = () => {
   const fetchArticles = async (userId: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:6543/api/articles/user/${userId}`
+        `https://scribe-space-backend.vercel.app/api/articles/user/${userId}`
       );
       setArticles(response.data);
       setLoading(false);

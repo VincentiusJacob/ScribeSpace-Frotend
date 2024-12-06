@@ -24,7 +24,9 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
       const userId = userData.user_id;
 
       axios
-        .get(`http://localhost:6543/api/users/getUserById/${userId}`)
+        .get(
+          `https://scribe-space-backend.vercel.app/api/users/getUserById/${userId}`
+        )
         .then((response) => {
           const profilePictureUrl = response.data.user.profile_picture;
           setProfilePicture(profilePictureUrl);

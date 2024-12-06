@@ -38,7 +38,7 @@ const ArticleDetail = () => {
     const fetchArticle = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:6543/api/articles/getArticle/${articleID}`
+          `https://scribe-space-backend.vercel.app/api/articles/getArticle/${articleID}`
         );
         setArticle(response.data);
       } catch (error) {
@@ -64,7 +64,7 @@ const ArticleDetail = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:6543/api/articles/getRecommendations",
+          "https://scribe-space-backend.vercel.app/api/articles/getRecommendations",
           { tags, excludeArticleID: article.article_id, limit: 6 }
         );
         console.log("Recommended articles:", response.data); // Log untuk melihat data artikel yang diterima
@@ -83,7 +83,7 @@ const ArticleDetail = () => {
         try {
           // Ganti URL dengan endpoint API yang sesuai untuk mengambil username berdasarkan user_id
           const response = await axios.get(
-            `http://localhost:6543/api/users/getUserById/${article.user_id}`
+            `https://scribe-space-backend.vercel.app/api/users/getUserById/${article.user_id}`
           );
           setCreator(response.data.user); // Simpan username di state
         } catch (error) {
