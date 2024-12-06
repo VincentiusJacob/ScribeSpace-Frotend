@@ -1,0 +1,146 @@
+.homePageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.homePageTag {
+  display: flex;
+  justify-content: center;
+  padding: 3em;
+}
+
+.most-trending,
+.explore-more,
+.articles-related,
+.search-results {
+  padding: 0 4em;
+  display: flex;
+  flex-direction: column;
+  margin-top: 7em;
+  gap: 2em;
+}
+
+.article-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em; /* Menetapkan tinggi grid */
+  height: 100%;
+}
+
+.most-trending .left-column,
+.most-trending .right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  height: 100%;
+}
+
+.article-card.large {
+  flex: 1;
+}
+
+.left-column > .article-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.left-column > .article-card > h2 {
+  font-size: 40px;
+}
+
+.left-column > .article-card > img {
+  width: 100%;
+  max-height: 600px;
+  border-radius: 24px;
+}
+
+.article-views {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.article-tags {
+  display: flex;
+  gap: 1em;
+}
+
+.tag {
+  padding: 1em;
+  border-radius: 20px;
+  border: 1px solid;
+}
+
+.explore-more .article-list {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Grid 3 kolom untuk bagian Explore More */
+  gap: 2em;
+}
+
+.explore-more > .article-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.articles-related .article-list {
+  display: grid;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ); /* Grid 3 kolom untuk bagian Explore More */
+  gap: 2em;
+}
+
+.articles-related > .article-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.articles-related > .article-list > .article-card > img {
+  width: 100%;
+  max-height: 400px;
+}
+
+.explore-more > .article-list > .article-card > img {
+  width: 100%;
+  max-height: 400px;
+}
+
+.right-column > .article-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2em;
+}
+
+.right-column > .article-card > img {
+  width: 200px;
+  height: 100%;
+  border-radius: 24px;
+}
+
+.article-trending-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.article-trending-info > .article-tags > .tag {
+  padding: 0.6em;
+}
+
+.article-card {
+  border: 1px solid;
+  box-shadow: 0px 2px 5px black;
+  padding: 3em;
+  text-decoration: none;
+  color: black;
+}

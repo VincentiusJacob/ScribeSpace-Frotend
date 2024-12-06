@@ -1,0 +1,109 @@
+.headerContainer {
+  padding: 2em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+}
+
+.header-left {
+  display: flex;
+  gap: 3em;
+  align-items: center;
+}
+
+.blog-search {
+  position: relative;
+}
+
+.blog-search > input {
+  padding: 1em;
+  padding-left: 4em;
+  font-size: 16px;
+
+  border-radius: 20px;
+}
+
+#search-icon-header {
+  position: absolute;
+  top: 18%;
+  left: 5%;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 3em;
+}
+
+.create-blog {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+  border: 1px solid;
+  padding: 1em;
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+}
+
+.link-text {
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.profile-image-display {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile-settings {
+  position: absolute;
+  top: 60px;
+  left: -300%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  padding: 1em;
+  z-index: 10;
+}
+
+.profile-settings ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.profile-settings li {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  padding: 0.5em 0;
+}
+
+.profile-settings button {
+  width: 100%;
+  padding: 0.8em;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.navigation-link {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+}

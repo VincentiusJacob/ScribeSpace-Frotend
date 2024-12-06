@@ -1,0 +1,64 @@
+.signUpPage,
+.loginPage {
+  position: relative;
+}
+
+.landingPage {
+  filter: blur(10px);
+  z-index: -1;
+}
+
+.authenticationBox {
+  width: 800px;
+  background-color: #fff8f8;
+  z-index: 100;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3em;
+  padding: 7em 7em;
+  border-radius: 12px;
+  border: 1px solid;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.authenticationBox > h2 {
+  font-size: 40px;
+}
+
+.authenticationBox > p {
+  font-size: 20px;
+}
+
+.authenticationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  align-items: center;
+  max-width: 70%;
+  width: 100%;
+}
+
+.form-detail {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+}
+
+.form-detail > input {
+  padding: 12px;
+  border-radius: 20px;
+}
+
+#submit-btn {
+  padding: 1em 1.5em;
+  border: 1px solid;
+  border-radius: 12px;
+  background-color: black;
+  color: white;
+}
