@@ -97,7 +97,7 @@ const WritingPage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:6543/api/articles/uploadMedia",
+        "https://scribe-space-backend.vercel.app/api/articles/uploadMedia",
         formData
       );
       return response.data.url;
@@ -155,7 +155,7 @@ const WritingPage: React.FC = () => {
       );
 
       const response = await axios.post(
-        "http://localhost:6543/api/articles/publish",
+        "https://scribe-space-backend.vercel.app/api/articles/publish",
         {
           title,
           content: articleContent,

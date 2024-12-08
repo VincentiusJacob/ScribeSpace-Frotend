@@ -20,7 +20,9 @@ const ProfilePage = () => {
   useEffect(() => {
     if (userId) {
       axios
-        .get(`http://localhost:6543/api/users/getUserById/${userId}`)
+        .get(
+          `https://scribe-space-backend.vercel.app/api/users/getUserById/${userId}`
+        )
         .then((response) => {
           setUserData(response.data.user);
           setNewUsername(response.data.user.username);
@@ -47,7 +49,7 @@ const ProfilePage = () => {
     try {
       if (userId) {
         const response = await axios.put(
-          `http://localhost:6543/api/users/profile/${userId}`,
+          `https://scribe-space-backend.vercel.app/api/users/profile/${userId}`,
           formData,
           {
             headers: {

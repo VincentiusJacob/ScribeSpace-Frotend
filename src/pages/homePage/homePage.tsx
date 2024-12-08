@@ -79,7 +79,7 @@ const HomePage: React.FC = () => {
   const handleArticleClick = async (articleId: string) => {
     try {
       await axios.put(
-        `http://localhost:6543/api/articles/incrementViews/${articleId}`
+        `https://scribe-space-backend.vercel.app/api/articles/incrementViews/${articleId}`
       );
     } catch (error) {
       console.error("Error updating views:", error);
@@ -90,7 +90,7 @@ const HomePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:6543/api/articles/getArticles"
+          "https://scribe-space-backend.vercel.app/api/articles/getArticles"
         );
         const rawArticles: Article[] = response.data;
 
@@ -114,7 +114,7 @@ const HomePage: React.FC = () => {
           if (imageUrl && imageUrl !== article.image_url) {
             try {
               await axios.put(
-                `http://localhost:6543/api/articles/updateImageUrl/${article.article_id}`,
+                `https://scribe-space-backend.vercel.app/api/articles/updateImageUrl/${article.article_id}`,
                 { image_url: imageUrl }
               );
             } catch (error) {
