@@ -15,26 +15,14 @@ const Teams: React.FC = () => {
       <div className="teamMembers">
         <div className="teamMember">
           <img src="https://via.placeholder.com/150" alt="Team Member" />
-          <h2>John Doe</h2>
-          <p>CEO & Founder</p>
-        </div>
-
-        <div className="teamMember">
-          <img src="https://via.placeholder.com/150" alt="Team Member" />
-          <h2>Jane Smith</h2>
+          <h2>Vincentius Jacob Gunawan</h2>
           <p>Lead Developer</p>
         </div>
 
         <div className="teamMember">
           <img src="https://via.placeholder.com/150" alt="Team Member" />
-          <h2>Mark Taylor</h2>
-          <p>UI/UX Designer</p>
-        </div>
-
-        <div className="teamMember">
-          <img src="https://via.placeholder.com/150" alt="Team Member" />
-          <h2>Lisa Brown</h2>
-          <p>Marketing Specialist</p>
+          <h2>Tandri Wibowo</h2>
+          <p>Data Specialist</p>
         </div>
       </div>
     </div>
