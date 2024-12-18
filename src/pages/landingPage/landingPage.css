@@ -135,38 +135,11 @@
   background-position: center;
 }
 
-.primary-button {
-  background: #007bff;
-  color: #fff;
+.teamMember:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
 }
 
-.hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 60px;
-}
-
-.features {
-  text-align: center;
-  padding: 60px 20px;
-}
-
-.feature-list {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.feature-item {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.feature-icon {
-  font-size: 2em;
-  color: #007bff;
+html {
+  scroll-behavior: smooth;
 }

@@ -1,10 +1,103 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Swal from "sweetalert2";
-import { FaPen, FaBook, FaUsers, FaQuestionCircle } from "react-icons/fa";
+import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./landingPage.css";
 
+gsap.registerPlugin(ScrollTrigger);
 const LandingPage: React.FC = () => {
+  useEffect(() => {
+    // Entrance animations for headers
+    gsap.from(".header", {
+      duration: 1.5,
+      opacity: 0,
+      y: -50,
+      ease: "power4.out",
+    });
+
+    // Entrance animation for the left section
+    gsap.from(".bodyleft h1", {
+      duration: 1,
+      x: -100,
+      opacity: 0,
+      ease: "power3.out",
+    });
+
+    gsap.from(".bodyleft p", {
+      duration: 1.5,
+      x: -100,
+      opacity: 0,
+      delay: 0.5,
+      ease: "power3.out",
+    });
+
+    gsap.from(".bodyleft button", {
+      duration: 1,
+      scale: 0,
+      opacity: 0,
+      delay: 1,
+      ease: "bounce.out",
+    });
+
+    // Scroll-triggered animations
+    gsap.from(".aboutContainer", {
+      scrollTrigger: {
+        trigger: ".aboutContainer",
+        start: "top 75%",
+      },
+      opacity: 0,
+      x: 100,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+
+    gsap.from(".ourStoryContainer", {
+      scrollTrigger: {
+        trigger: ".ourStoryContainer",
+        start: "top 75%",
+      },
+      opacity: 0,
+      y: 100,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+
+    gsap.from(".teamsContainer", {
+      scrollTrigger: {
+        trigger: ".teamsContainer",
+        start: "top 75%",
+      },
+      opacity: 0,
+      scale: 0.9,
+      duration: 1.5,
+      ease: "elastic.out(1, 0.3)",
+    });
+
+    // Hover animation for links
+    const links = document.querySelectorAll(".navigationlist a");
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, { scale: 1.1, duration: 0.3, ease: "power2.out" });
+      });
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, { scale: 1, duration: 0.3, ease: "power2.out" });
+      });
+    });
+
+    // Footer pop-in animation
+    gsap.from(".footer", {
+      scrollTrigger: {
+        trigger: ".footer",
+        start: "top 85%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: "power3.out",
+    });
+  }, []);
+
   const handleWriteClick = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
@@ -16,7 +109,7 @@ const LandingPage: React.FC = () => {
         confirmButtonText: "OK",
       });
     } else {
-      window.location.href = "/write";
+      window.location.href = "/write"; // Arahkan ke halaman menulis artikel
     }
   };
 
@@ -31,151 +124,159 @@ const LandingPage: React.FC = () => {
         confirmButtonText: "OK",
       });
     } else {
-      window.location.href = "/home";
+      window.location.href = "/home"; // Arahkan ke halaman membaca artikel (sesuaikan dengan path)
     }
   };
 
   return (
-    <div className="landing-page">
-      {/* Header Section */}
-      <motion.header
-        className="header"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <div className="logo">
-          <h1>ScribeSpace</h1>
+    <div className="container">
+      <div className="header">
+        <h1> ScribeSpace </h1>
+        <ul className="navigationlist">
+          <li>
+            <Link to="/ourstory"> Our Story</Link>
+          </li>
+          <li>
+            <Link to="/" onClick={handleWriteClick}>
+              {" "}
+              Write
+            </Link>{" "}
+          </li>
+          <li>
+            <Link to="/login"> Sign in</Link>
+          </li>
+        </ul>
+        <Link to="/registration" className="button">
+          Get Started
+        </Link>
+      </div>
+      <div className="body">
+        <div className="bodyleft">
+          <h1> Inspiration is everywhere</h1>
+          <p> A place to read, write, and deepen your understanding</p>
+          <button className="button" onClick={handleReadClick}>
+            {" "}
+            Start reading
+          </button>{" "}
         </div>
-        <nav className="navigation">
-          <ul className="navigation-list">
-            <li>
-              <Link to="/ourstory">Our Story</Link>
-            </li>
-            <li>
-              <Link to="/" onClick={handleWriteClick}>
-                Write
-              </Link>
-            </li>
-            <li>
-              <Link to="/login">Sign in</Link>
-            </li>
-          </ul>
-          <Link to="/registration" className="button primary-button">
-            Get Started
-          </Link>
-        </nav>
-      </motion.header>
-
-      {/* Hero Section */}
-      <motion.div
-        className="hero"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-      >
-        <motion.div
-          className="hero-text"
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1>Inspiration is everywhere</h1>
+        <div className="bodyright"></div>
+      </div>
+      <div className="aboutContainer">
+        <div className="aboutHeader">
+          <h1>About ScribeSpace</h1>
           <p>
-            ScribeSpace is a platform where ideas come to life. Read articles,
-            share stories, and explore endless possibilities.
+            ScribeSpace is a platform where creativity, ideas, and storytelling
+            come to life. It is a place for writers, readers, and creators to
+            share their stories, insights, and experiences with the world.
           </p>
-          <button className="button primary-button" onClick={handleReadClick}>
-            Start Reading
-          </button>
-        </motion.div>
-        <motion.div
-          className="hero-image"
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-        >
-          <img
-            src="https://via.placeholder.com/500x300"
-            alt="Inspiration everywhere"
-          />
-        </motion.div>
-      </motion.div>
-
-      {/* Features Section */}
-      <motion.section
-        className="features"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
-      >
-        <h2>Why Choose ScribeSpace?</h2>
-        <div className="feature-list">
-          <motion.div
-            className="feature-item"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <FaPen className="feature-icon" />
-            <h3>Write</h3>
-            <p>Share your stories and ideas with a global audience.</p>
-          </motion.div>
-          <motion.div
-            className="feature-item"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <FaBook className="feature-icon" />
-            <h3>Read</h3>
-            <p>Discover articles and insights from around the world.</p>
-          </motion.div>
-          <motion.div
-            className="feature-item"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <FaUsers className="feature-icon" />
-            <h3>Community</h3>
-            <p>Connect with like-minded individuals and collaborate.</p>
-          </motion.div>
-          <motion.div
-            className="feature-item"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <FaQuestionCircle className="feature-icon" />
-            <h3>Support</h3>
-            <p>We're here to help you every step of the way.</p>
-          </motion.div>
         </div>
-      </motion.section>
 
-      {/* Footer Section */}
-      <motion.footer
-        className="footer"
-        initial={{ y: 100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="footer-links">
-          <ul className="navigation-list">
-            <li>
-              <Link to="/help">Help</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/status">Status</Link>
-            </li>
-            <li>
-              <Link to="/teams">Teams</Link>
-            </li>
+        <div className="aboutContent">
+          <h2>Our Mission</h2>
+          <p>
+            Our mission is to empower individuals to express themselves through
+            writing, foster creativity, and build a community of passionate
+            storytellers. We aim to make it easier for people to connect, learn,
+            and grow.
+          </p>
+
+          <h2>Our Values</h2>
+          <ul>
+            <li>Creativity</li>
+            <li>Community</li>
+            <li>Inclusivity</li>
+            <li>Innovation</li>
           </ul>
         </div>
-        <p>&copy; 2024 ScribeSpace. All Rights Reserved.</p>
-      </motion.footer>
+      </div>
+
+      <div className="ourStoryContainer">
+        <div className="storyHeader">
+          <h1>Our Story</h1>
+          <p>
+            ScribeSpace was born out of a simple idea: to create a space where
+            anyone can share their stories, ideas, and knowledge with the world.
+          </p>
+        </div>
+
+        <div className="storyContent">
+          <div className="contentSection">
+            <h2>Our Mission</h2>
+            <p>
+              Our mission at ScribeSpace is to empower individuals to express
+              themselves through writing. Whether it's an article, a personal
+              story, or an idea, we provide a platform for people to share their
+              voices and connect with others.
+            </p>
+          </div>
+
+          <div className="contentSection">
+            <h2>Why We Built ScribeSpace</h2>
+            <p>
+              We believe that everyone has a story to tell, and ScribeSpace is
+              here to help make that story accessible to the world. With the
+              advent of social media and online communication, we've created a
+              space where writers can control their narrative without the
+              clutter of distractions.
+            </p>
+          </div>
+
+          <div className="contentSection">
+            <h2>Our Vision</h2>
+            <p>
+              Our vision is to become the go-to platform for passionate writers
+              around the globe. We want to foster a community of creators,
+              thinkers, and storytellers who share a common love for writing and
+              knowledge exchange.
+            </p>
+          </div>
+
+          <div className="contentSection">
+            <h2>Join Us on This Journey</h2>
+            <p>
+              Whether you're an experienced writer or just getting started, we
+              invite you to be part of the ScribeSpace community. Together, we
+              can inspire, educate, and motivate each other to reach new
+              heights.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="teamsContainer">
+        <div className="teamsHeader">
+          <h1>Meet Our Team</h1>
+          <p>
+            Our team is made up of passionate individuals who are dedicated to
+            bringing the best experience to the ScribeSpace community.
+          </p>
+        </div>
+
+        <div className="teamMembers">
+          <div className="teamMember">
+            <img src="https://via.placeholder.com/150" alt="Team Member" />
+            <h2>Vincentius Jacob Gunawan</h2>
+            <p>Lead Developer</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="footer">
+        <ul className="navigationlist">
+          <li>
+            <Link to="/help"> Help </Link>
+          </li>
+          <li>
+            <Link to="/about"> About</Link>
+          </li>
+          <li>
+            <Link to="/status"> Status</Link>
+          </li>
+          <li>
+            <Link to="/teams"> Teams </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };
