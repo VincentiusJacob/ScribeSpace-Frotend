@@ -215,7 +215,7 @@ const WritingPage: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="myStory" className="profile-nav">
+                  <Link to="/myStory" className="profile-nav">
                     <LibraryBooksIcon />
                     My Story
                   </Link>

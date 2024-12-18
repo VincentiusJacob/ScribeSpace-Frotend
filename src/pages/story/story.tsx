@@ -69,7 +69,7 @@ const StoryPage = () => {
         <div className="article-grid">
           {articles.map((article: Article) => (
             <div key={article.article_id} className="article-card">
-              <Link to={`/${article.article_id}`}>
+              <Link to={`/${article.article_id}`} className="article-card">
                 {article.image_url && (
                   <img src={article.image_url} alt={article.title} />
                 )}
