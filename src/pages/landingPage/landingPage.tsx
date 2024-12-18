@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import { FaPen, FaBook, FaUsers, FaQuestionCircle } from "react-icons/fa";
 import "./landingPage.css";
 
 const LandingPage: React.FC = () => {
-  // Fungsi untuk menangani klik pada "Write"
   const handleWriteClick = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
@@ -15,11 +16,10 @@ const LandingPage: React.FC = () => {
         confirmButtonText: "OK",
       });
     } else {
-      window.location.href = "/write"; // Arahkan ke halaman menulis artikel
+      window.location.href = "/write";
     }
   };
 
-  // Fungsi untuk menangani klik pada "Start reading"
   const handleReadClick = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
@@ -31,59 +31,151 @@ const LandingPage: React.FC = () => {
         confirmButtonText: "OK",
       });
     } else {
-      window.location.href = "/home"; // Arahkan ke halaman membaca artikel (sesuaikan dengan path)
+      window.location.href = "/home";
     }
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <h1> ScribeSpace </h1>
-        <ul className="navigationlist">
-          <li>
-            <Link to="/ourstory"> Our Story</Link>
-          </li>
-          <li>
-            <Link to="/" onClick={handleWriteClick}>
-              {" "}
-              Write
-            </Link>{" "}
-          </li>
-          <li>
-            <Link to="/login"> Sign in</Link>
-          </li>
-        </ul>
-        <Link to="/registration" className="button">
-          Get Started
-        </Link>
-      </div>
-      <div className="body">
-        <div className="bodyleft">
-          <h1> Inspiration is everywhere</h1>
-          <p> A place to read, write, and deepen your understanding</p>
-          <button className="button" onClick={handleReadClick}>
-            {" "}
-            Start reading
-          </button>{" "}
+    <div className="landing-page">
+      {/* Header Section */}
+      <motion.header
+        className="header"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="logo">
+          <h1>ScribeSpace</h1>
         </div>
-        <div className="bodyright"></div>
-      </div>
-      <div className="footer">
-        <ul className="navigationlist">
-          <li>
-            <Link to="/help"> Help </Link>
-          </li>
-          <li>
-            <Link to="/about"> About</Link>
-          </li>
-          <li>
-            <Link to="/status"> Status</Link>
-          </li>
-          <li>
-            <Link to="/teams"> Teams </Link>
-          </li>
-        </ul>
-      </div>
+        <nav className="navigation">
+          <ul className="navigation-list">
+            <li>
+              <Link to="/ourstory">Our Story</Link>
+            </li>
+            <li>
+              <Link to="/" onClick={handleWriteClick}>
+                Write
+              </Link>
+            </li>
+            <li>
+              <Link to="/login">Sign in</Link>
+            </li>
+          </ul>
+          <Link to="/registration" className="button primary-button">
+            Get Started
+          </Link>
+        </nav>
+      </motion.header>
+
+      {/* Hero Section */}
+      <motion.div
+        className="hero"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <motion.div
+          className="hero-text"
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1>Inspiration is everywhere</h1>
+          <p>
+            ScribeSpace is a platform where ideas come to life. Read articles,
+            share stories, and explore endless possibilities.
+          </p>
+          <button className="button primary-button" onClick={handleReadClick}>
+            Start Reading
+          </button>
+        </motion.div>
+        <motion.div
+          className="hero-image"
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <img
+            src="https://via.placeholder.com/500x300"
+            alt="Inspiration everywhere"
+          />
+        </motion.div>
+      </motion.div>
+
+      {/* Features Section */}
+      <motion.section
+        className="features"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+      >
+        <h2>Why Choose ScribeSpace?</h2>
+        <div className="feature-list">
+          <motion.div
+            className="feature-item"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FaPen className="feature-icon" />
+            <h3>Write</h3>
+            <p>Share your stories and ideas with a global audience.</p>
+          </motion.div>
+          <motion.div
+            className="feature-item"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FaBook className="feature-icon" />
+            <h3>Read</h3>
+            <p>Discover articles and insights from around the world.</p>
+          </motion.div>
+          <motion.div
+            className="feature-item"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FaUsers className="feature-icon" />
+            <h3>Community</h3>
+            <p>Connect with like-minded individuals and collaborate.</p>
+          </motion.div>
+          <motion.div
+            className="feature-item"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FaQuestionCircle className="feature-icon" />
+            <h3>Support</h3>
+            <p>We're here to help you every step of the way.</p>
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* Footer Section */}
+      <motion.footer
+        className="footer"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="footer-links">
+          <ul className="navigation-list">
+            <li>
+              <Link to="/help">Help</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/status">Status</Link>
+            </li>
+            <li>
+              <Link to="/teams">Teams</Link>
+            </li>
+          </ul>
+        </div>
+        <p>&copy; 2024 ScribeSpace. All Rights Reserved.</p>
+      </motion.footer>
     </div>
   );
 };
