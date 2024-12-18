@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./story.css";
 
 interface Article {
@@ -41,6 +42,24 @@ const StoryPage = () => {
     }
   };
 
+  const handleDelete = async (articleId: string) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this article?"
+    );
+    if (confirmDelete) {
+      try {
+        await axios.delete(
+          `https://scribe-space-backend.vercel.app/api/articles/${articleId}`
+        );
+        setArticles(
+          articles.filter((article) => article.article_id !== articleId)
+        );
+      } catch (error) {
+        console.error("Error deleting article:", error);
+      }
+    }
+  };
+
   return (
     <div className="story-page">
       <h1> My Collections </h1>
@@ -49,26 +68,28 @@ const StoryPage = () => {
       ) : (
         <div className="article-grid">
           {articles.map((article: Article) => (
-            <Link
-              to={`/${article.article_id}`}
-              key={article.article_id}
-              className="article-card"
-            >
-              {article.image_url && (
-                <img src={article.image_url} alt={article.title} />
-              )}
-              <h2>{article.title}</h2>
-              <div className="article-tags">
-                {article.article_tags.map((tagWrapper, index) => (
-                  <p className="tag" key={index}>
-                    {tagWrapper.tags.name}
-                  </p>
-                ))}
-              </div>
-              <p className="article-views">
-                <RemoveRedEyeIcon fontSize="medium" /> {article.views}
-              </p>
-            </Link>
+            <div key={article.article_id} className="article-card">
+              <Link to={`/${article.article_id}`}>
+                {article.image_url && (
+                  <img src={article.image_url} alt={article.title} />
+                )}
+                <h2>{article.title}</h2>
+                <div className="article-tags">
+                  {article.article_tags.map((tagWrapper, index) => (
+                    <p className="tag" key={index}>
+                      {tagWrapper.tags.name}
+                    </p>
+                  ))}
+                </div>
+                <p className="article-views">
+                  <RemoveRedEyeIcon fontSize="medium" /> {article.views}
+                </p>
+              </Link>
+              <button onClick={() => handleDelete(article.article_id)}>
+                <DeleteIcon fontSize="small" />
+                Delete
+              </button>
+            </div>
           ))}
         </div>
       )}
