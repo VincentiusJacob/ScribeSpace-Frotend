@@ -8,93 +8,135 @@ import "./landingPage.css";
 gsap.registerPlugin(ScrollTrigger);
 const LandingPage: React.FC = () => {
   useEffect(() => {
-    // Entrance animations for headers
-    gsap.from(".header", {
-      duration: 1.5,
-      opacity: 0,
-      y: -50,
+    // Header text animation with letter splitting
+    gsap.from(".header h1", {
+      duration: 2,
+      text: { value: "ScribeSpace", delimiter: "" },
       ease: "power4.out",
     });
 
-    // Entrance animation for the left section
+    // Navigation links pop-in with rotation
+    gsap.from(".navigationlist li", {
+      duration: 1.5,
+      y: -50,
+      opacity: 0,
+      rotationX: 360,
+      stagger: 0.2,
+      ease: "back.out(2)",
+    });
+
+    // Button spinning entrance
+    gsap.from(".button", {
+      duration: 1.5,
+      scale: 0.5,
+      rotation: 360,
+      opacity: 0,
+      ease: "elastic.out(1, 0.75)",
+    });
+
+    // Body left section slide-in
     gsap.from(".bodyleft h1", {
       duration: 1,
-      x: -100,
+      x: -150,
       opacity: 0,
       ease: "power3.out",
     });
 
     gsap.from(".bodyleft p", {
       duration: 1.5,
-      x: -100,
+      x: -150,
       opacity: 0,
-      delay: 0.5,
+      delay: 0.3,
       ease: "power3.out",
     });
 
     gsap.from(".bodyleft button", {
-      duration: 1,
+      duration: 1.2,
       scale: 0,
       opacity: 0,
-      delay: 1,
       ease: "bounce.out",
     });
 
-    // Scroll-triggered animations
+    // Body right floating effect
+    gsap.to(".bodyright", {
+      y: 20,
+      duration: 2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Scroll-triggered animations for about section
     gsap.from(".aboutContainer", {
       scrollTrigger: {
         trigger: ".aboutContainer",
-        start: "top 75%",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
       },
+      x: -200,
       opacity: 0,
-      x: 100,
       duration: 1.5,
       ease: "power3.out",
     });
 
+    // Our story container scroll-triggered animation
     gsap.from(".ourStoryContainer", {
       scrollTrigger: {
         trigger: ".ourStoryContainer",
-        start: "top 75%",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
       },
-      opacity: 0,
       y: 100,
+      opacity: 0,
       duration: 1.5,
       ease: "power3.out",
     });
 
+    // Team container pop-in effect
     gsap.from(".teamsContainer", {
       scrollTrigger: {
         trigger: ".teamsContainer",
-        start: "top 75%",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
       },
       opacity: 0,
-      scale: 0.9,
+      scale: 0.5,
       duration: 1.5,
-      ease: "elastic.out(1, 0.3)",
+      ease: "elastic.out(1, 0.5)",
     });
 
-    // Hover animation for links
-    const links = document.querySelectorAll(".navigationlist a");
-    links.forEach((link) => {
-      link.addEventListener("mouseenter", () => {
-        gsap.to(link, { scale: 1.1, duration: 0.3, ease: "power2.out" });
-      });
-      link.addEventListener("mouseleave", () => {
-        gsap.to(link, { scale: 1, duration: 0.3, ease: "power2.out" });
-      });
-    });
-
-    // Footer pop-in animation
+    // Footer bouncing effect on scroll
     gsap.from(".footer", {
       scrollTrigger: {
         trigger: ".footer",
-        start: "top 85%",
+        start: "top 90%",
+        toggleActions: "play none none reverse",
       },
-      opacity: 0,
       y: 50,
+      opacity: 0,
       duration: 1.5,
-      ease: "power3.out",
+      ease: "bounce.out",
+    });
+
+    // Hover effect for navigation links
+    const links = document.querySelectorAll(".navigationlist a");
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        gsap.to(link, {
+          scale: 1.2,
+          rotation: 15,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      });
     });
   }, []);
 
