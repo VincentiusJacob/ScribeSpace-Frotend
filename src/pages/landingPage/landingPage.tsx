@@ -316,7 +316,7 @@ const LandingPage: React.FC = () => {
 
           <div className="teamMembers">
             <div className="teamMember">
-              <img src={pp} width={200} height={200} alt="Team Member" />
+              <img src={pp} alt="Team Member" />
               <h2>Vincentius Jacob Gunawan</h2>
               <p>Lead Developer</p>
             </div>
