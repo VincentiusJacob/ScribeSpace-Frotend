@@ -73,7 +73,7 @@ const LandingPage: React.FC = () => {
         el: ourStoryRef.current,
         opacity: { 0: 1 },
         y: { 100: 0 },
-        duration: 3000,
+        duration: 2000,
         easing: "ease.out",
       });
       createScrollAnimation(ourStoryRef.current, ourStoryAnimation);
