@@ -11,6 +11,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import fb from "../../assets/facebook.png";
 import twt from "../../assets/twitter.png";
 import linkedin from "../../assets/linkedin.png";
+import pp from "../../assets/pp.jpg";
 import "./landingPage.css";
 
 const LandingPage: React.FC = () => {
@@ -315,7 +316,7 @@ const LandingPage: React.FC = () => {
 
           <div className="teamMembers">
             <div className="teamMember">
-              <img src="https://via.placeholder.com/150" alt="Team Member" />
+              <img src={pp} width={200} height={200} alt="Team Member" />
               <h2>Vincentius Jacob Gunawan</h2>
               <p>Lead Developer</p>
             </div>

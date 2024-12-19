@@ -329,6 +329,9 @@ html {
 }
 
 .teamsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
   margin-top: 10em;
 }
 
@@ -354,6 +357,19 @@ html {
   background-color: greenyellow;
   padding: 3em;
   border-radius: 24px;
+}
+
+.teamMember {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  border-radius: 12px;
+  padding: 2em;
+  background-color: black;
+  color: white;
+  img {
+    border-radius: 12px;
+  }
 }
 
 .footer {
