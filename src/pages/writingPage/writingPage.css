@@ -14,7 +14,7 @@
 .content-input {
   width: 100%;
   font-size: 1.2em;
-  border: none; /* Removed border */
+  border: none;
   outline: none;
   resize: none;
   padding: 10px;
@@ -152,8 +152,8 @@
 .tags-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; /* Ensures that tags wrap to the next line if necessary */
-  gap: 10px; /* Space between tags */
+  flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 70px;
 }
 
@@ -162,10 +162,9 @@
   margin-bottom: 10px;
   font-weight: bold;
   color: #333;
-  width: 100%; /* Ensures the title takes full width above the tags */
+  width: 100%;
 }
 
-/* Tag Buttons */
 .tag-button {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
