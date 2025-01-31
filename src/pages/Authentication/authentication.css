@@ -62,3 +62,16 @@
   background-color: black;
   color: white;
 }
+
+@media (max-width: 450px) and (max-height: 950px) {
+  .authenticationBox {
+    width: 400px;
+    top: 10%;
+    height: 700px;
+    padding: 3em;
+
+    h2 {
+      font-size: 35px;
+    }
+  }
+}

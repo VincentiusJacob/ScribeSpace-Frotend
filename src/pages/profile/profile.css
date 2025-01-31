@@ -58,3 +58,13 @@
 .picture-section > img {
   align-self: center;
 }
+
+@media (max-width: 450px) and (max-height: 950px) {
+  .profile-page {
+    padding: 6em 2em;
+  }
+
+  .profile-page > form {
+    gap: 2em;
+  }
+}

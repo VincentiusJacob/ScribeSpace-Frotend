@@ -81,7 +81,7 @@ body {
   height: 500px;
   max-height: 500px;
   border-radius: 20px;
-  background-image: url("../../assets/medium-icon.jpg");
+  background-image: url("../../assets/medium-icon.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -439,4 +439,146 @@ html {
 
 .navigationlist > li > a:hover::after {
   width: 100%;
+}
+
+@media (max-width: 1200px) and (max-height: 1367px) {
+  .body {
+    padding: 4em;
+  }
+
+  .bodyleft p {
+    font-size: 28px;
+    max-width: 400px;
+  }
+
+  .our-values ul li img {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 450px) and (max-height: 950px) {
+  .body-first {
+    flex-direction: column;
+    align-items: center;
+    gap: 4em;
+  }
+
+  .bodyleft {
+    align-items: center;
+  }
+
+  .bodyleft h1 {
+    font-size: 60px;
+    text-align: center;
+  }
+
+  .bodyleft p {
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .bodyleft > button {
+    margin-top: 2em;
+  }
+
+  .bodyright {
+    width: 350px;
+    height: 350px;
+  }
+
+  .header {
+    padding: 2em;
+    justify-content: space-between;
+    border: 1px solid;
+
+    h1 {
+      font-size: 20px;
+      margin-left: -100px;
+    }
+  }
+
+  .navigationlist {
+    display: none;
+  }
+
+  .aboutHeader {
+    align-items: center;
+    gap: 2em;
+  }
+  .aboutHeader h2 {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .our-mission {
+    font-size: 24px;
+    padding-left: 2em;
+  }
+
+  .our-values {
+    font-size: 24px;
+  }
+
+  .our-values ul {
+    flex-direction: column;
+    padding-right: 2em;
+    gap: 1em;
+  }
+
+  .ourStoryContainer {
+    padding: 0;
+  }
+  .storyHeader h1 {
+    font-size: 40px;
+  }
+
+  .storyHeader p {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .storyCarousel {
+    padding: 2em;
+  }
+
+  .carouselItem {
+    font-size: 16px;
+  }
+
+  .carouselItem h2 {
+    font-size: 28px;
+    text-align: center;
+  }
+
+  .carouselControls button {
+    background: transparent;
+    color: black;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+
+  .carouselControls button svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .prev {
+    left: 10px;
+  }
+
+  .next {
+    right: 10px;
+  }
+
+  .teamMember h2 {
+    font-size: 20px;
+  }
+
+  .teamMember img {
+    width: 100px;
+    height: 200px;
+  }
 }

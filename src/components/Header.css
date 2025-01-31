@@ -126,3 +126,37 @@
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 450px) and (max-height: 950px) {
+  .headerContainer {
+    padding: 1rem;
+  }
+
+  .header-left {
+    gap: 1em;
+    flex-direction: column;
+  }
+
+  .header-left h1 {
+    font-size: 20px;
+  }
+
+  .blog-search > input {
+    padding-left: 3em;
+    width: 150px;
+  }
+
+  .header-right {
+    gap: 1em;
+  }
+
+  .create-blog {
+    padding: 5px;
+    background-color: transparent;
+    color: black;
+
+    a {
+      color: black;
+    }
+  }
+}

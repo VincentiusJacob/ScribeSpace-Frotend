@@ -86,3 +86,10 @@
   max-height: 100%;
   border-radius: 24px;
 }
+
+@media (max-width: 450px) and (max-height: 950px) {
+  .recommendation-list {
+    display: flex;
+    flex-direction: column;
+  }
+}
