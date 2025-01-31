@@ -158,6 +158,11 @@
     padding: 0 0.5em;
   }
 
+  .articles-related .article-list {
+    display: flex;
+    flex-direction: column;
+  }
+
   .article-list {
     display: flex;
     flex-direction: column;
