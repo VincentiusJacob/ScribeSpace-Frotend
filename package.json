@@ -18,6 +18,7 @@
     "axios": "^1.7.8",
     "framer-motion": "^11.15.0",
     "gsap": "^3.12.5",
+    "lucide-react": "^0.516.0",
     "mo-js": "^0.288.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
